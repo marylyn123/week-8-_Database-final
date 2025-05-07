@@ -1,0 +1,42 @@
+┌───────────────────┐           ┌───────────────────┐
+│      Clinics      │           │   Specialties     │
+├───────────────────┤           ├───────────────────┤
+│ ClinicID (PK)     │◄─┐     ┌─┤ SpecialtyID (PK)   │
+│ Name              │  │     │ │ Name (UNIQUE)      │
+│ Address (UNIQUE)  │  │     │ │ Description        │
+│ Phone (UNIQUE)    │  │     │ └───────────────────┘
+└───────────────────┘  │     │
+           │1          │     │
+           │           │     │
+           ▼ M         │     │
+┌───────────────────┐  │     │
+│      Doctors      │  │     │
+├───────────────────┤  │     │
+│ DoctorID (PK)     │  │     │
+│ FirstName         │  │     │
+│ LastName          │  │     │
+│ LicenseNumber (U) │──┘     │
+│ ClinicID (FK)     │◄───────┘
+└───────────────────┘
+           │1
+           │
+           ▼ M
+┌───────────────────┐          ┌───────────────────┐
+│  Appointments     │          │     Patients      │
+├───────────────────┤          ├───────────────────┤
+│ AppointmentID (PK)│          │ PatientID (PK)    │
+│ DateTime          │◄─┐       │ FirstName         │
+│ Status            │  ├───────┤ LastName          │
+│ Notes             │  │       │ DateOfBirth       │
+│ PatientID (FK)    │──┘       │ Email (UNIQUE)    │
+│ DoctorID (FK)     │──┐       │ Phone (UNIQUE)    │
+└───────────────────┘  │       │ CreatedAt         │
+           ▲1          │       │ LastUpdated       │
+           │           │       └───────────────────┘
+           │ M         │
+┌─────────────────────┐
+│ DoctorSpecialties   │
+├─────────────────────┤
+│ DoctorID (PK, FK)   │
+│ SpecialtyID (PK, FK)│
+└─────────────────────┘
